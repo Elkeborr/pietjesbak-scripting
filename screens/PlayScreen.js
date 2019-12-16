@@ -10,6 +10,23 @@ export default class ContactDetailsScreen extends React.Component {
       </View>
     );
   }
-}
 
-rollDice = () => {};
+  rollDice = () => {};
+
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Game</Text>
+        <Button
+          title="Startscherm"
+          onPress={() => this.props.navigation.navigate("PlayersScreen")}
+        />
+
+        <Button
+          title="Einde"
+          onPress={() => this.props.navigation.navigate("EndScreen")}
+        />
+      </View>
+    );
+  }
+}
