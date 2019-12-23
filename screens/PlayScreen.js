@@ -40,13 +40,11 @@ export default class PlayScreen extends React.Component {
 
     return (
       <View>
-        <Container>
-          <Button title="ROl" onPress={this._rollDice} />
-          <Button title="PAS" />
-          <DiceOne />
-          <DiceTwo />
-          <DiceTree />
-        </Container>
+        <Button title="ROl" onPress={this._rollDice} />
+        <Button title="PAS" />
+        <DiceOne />
+        <DiceTwo />
+        <DiceTree />
 
         <Button
           title="Startscherm"
