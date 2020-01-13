@@ -35,7 +35,7 @@ Dueleren met 1 dobbelsteen. (Bij duel mogen ze ook 2 strepen verwijderen)
 Geen van de bovenste dan wint de hoogste score  
 1 = 100  
 6 = 60  
-### Een 7 7️⃣
+### Een 7️⃣
 Bij een zeven komt er bij elke speler een streep bij  
 ### Belangrijk 🥔
 Zand van 1 bestaat niet!  
