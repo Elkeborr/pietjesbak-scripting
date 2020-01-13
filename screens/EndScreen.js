@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, View, StyleSheet, Text } from "react-native";
 
-function PlayerWon() {
+function PlayerWon(props) {
   return <Text>Congratulations, you won!</Text>
 }
 
-function PlayerLost() {
+function PlayerLost(props) {
   return <Text>Sorry, you lost!</Text>
 }
 
