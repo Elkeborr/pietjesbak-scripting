@@ -35,3 +35,11 @@ Dueleren met 1 dobbelsteen. (Bij duel mogen ze ook 2 strepen verwijderen)
 Geen van de bovenste dan wint de hoogste score  
 1 = 100  
 6 = 60  
+
+### Belangrijk 🥔
+Zand van 1 bestaat niet!  
+De persoon die wint mag starten  
+Een speler mag max 3 keer rollen of het aantal rols van de eerste speler  
+Fake buttons zijn belangrijk voor het testen  
+De speler mag passen maar niet als die nog niet gegooid heegt  
+
