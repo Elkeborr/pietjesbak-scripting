@@ -21,7 +21,7 @@ function Result(props){
 export default class EndScreen extends React.Component {
     render() {
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View>
           <Result hasWon={false}/>
           <Button
             title="Home"
@@ -29,7 +29,7 @@ export default class EndScreen extends React.Component {
           />
           <Button
             title="Rematch"
-            onPress={() => this.props.navigation.navigate('Playscreen')}
+            onPress={() => this.props.navigation.navigate('PlayScreen')}
           />
         </View>
       );
