@@ -42,4 +42,8 @@ De persoon die wint mag starten
 Een speler mag max 3 keer rollen of het aantal rols van de eerste speler  
 Fake buttons zijn belangrijk voor het testen  
 De speler mag passen maar niet als die nog niet gegooid heeft  
+Aantal strepen (normaal gezien) 9
 
+## Linken
+
+https://pusher.com/tutorials/realtime-game-react-native
