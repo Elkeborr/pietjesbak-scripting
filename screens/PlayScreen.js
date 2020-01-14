@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, View, StyleSheet, Text, Dimensions } from "react-native";
+import { Button, View, StyleSheet, Text, Dimensions, Image } from "react-native";
 import { Container, TouchContainer, colors } from "./styles";
 
 import {
@@ -16,16 +16,24 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bg,
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
+    justifyContent: "center",
+    alignItems: "center",
   },
   playButtons: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    margin: 80,
   },
   dice: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-  }
+    top: 60,
+  },
+  backgroundImage:{
+    position: 'absolute',
+    top: 160,
+    width: 360,
+    height: 360,
+},
 })
 
 export default class PlayScreen extends React.Component {
@@ -57,6 +65,7 @@ export default class PlayScreen extends React.Component {
 
     return (
       <View style={styles.body}>
+        <Image style= {styles.backgroundImage} source={require('../assets/bak.png')}></Image>
         <View style={styles.dice}>
           <DiceOne />
           <DiceTwo />
