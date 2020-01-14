@@ -15,3 +15,9 @@ export const TouchContainer = styled.TouchableOpacity.attrs({
   justify-content: center;
   align-items: center;
 `;
+
+export const colors = {
+  blue: '#00C3B4',
+  red: '#FF4141',
+  bg: '#0E395D',
+}

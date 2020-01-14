@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Button, View, StyleSheet, Text } from "react-native";
-import { Container, TouchContainer } from "./styles";
+import { Button, View, StyleSheet, Text, Dimensions } from "react-native";
+import { Container, TouchContainer, colors } from "./styles";
 
 import {
   SideThree,
@@ -10,6 +10,23 @@ import {
   SideFive,
   SideSix
 } from "./components/dice/side";
+
+const styles = StyleSheet.create({
+  body: {
+    backgroundColor: colors.bg,
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
+  },
+  playButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    margin: 80,
+  },
+  dice: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  }
+})
 
 export default class PlayScreen extends React.Component {
   constructor(props) {
@@ -39,13 +56,17 @@ export default class PlayScreen extends React.Component {
     ];
 
     return (
-      <View>
-        <Button title="ROl" onPress={this._rollDice} />
-        <Button title="PAS" />
-        <DiceOne />
-        <DiceTwo />
-        <DiceTree />
-
+      <View style={styles.body}>
+        <View style={styles.dice}>
+          <DiceOne />
+          <DiceTwo />
+          <DiceTree />
+        </View>
+        <View style={styles.playButtons, {width: 120, height: 120}}>
+          <Button color={colors.blue} title="Gooien" onPress={this._rollDice} />
+          <Button color={colors.red} title="Passen" />
+        </View>
+        
         <Button
           title="Startscherm"
           onPress={() => this.props.navigation.navigate("PlayersScreen")}

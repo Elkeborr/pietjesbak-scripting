@@ -32,8 +32,8 @@ const Square = props => {
       width={94}
       height={94}
       rx={10}
-      fill="none"
-      stroke="#000000"
+      fill="#FFFFFF"
+      stroke="#FFFFFF"
       strokeWidth={5}
     ></Rect>
   );
