@@ -130,21 +130,19 @@ export default class PlayScreen extends React.Component {
         <Text>Total moves allowed</Text>
         <Text>{this.state.moves}</Text>
         <Text>score1</Text>
-        <Text>
+  
           {this.state.score1.map(listitem => (
-            <li className="list-group-item list-group-item-primary">
-              {listitem}
-            </li>
+                  <Text>  {listitem}   </Text>
           ))}
-        </Text>
+     
         <Text>score2</Text>
-        <Text>
+
           {this.state.score2.map(listitem => (
-            <li className="list-group-item list-group-item-primary">
-              {listitem}
-            </li>
+
+               <Text>  {listitem} </Text>
+    
           ))}
-        </Text>
+
 
         <Button title="ROl" onPress={this._rollDice} />
         <Button title="PAS" onPress={this._pass} />
