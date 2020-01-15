@@ -19,6 +19,8 @@ let countClickPlus;
 
 let nextPlayer;
 
+
+
 export default class PlayScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -27,17 +29,17 @@ export default class PlayScreen extends React.Component {
       sideTwo: 0, //tweede dobbelsteen
       sideTree: 0, //derde dobbelsteen
       countClick: 0, //tellen van de clicks
-      player1: "", //eerste speler
-      player2: "", //tweede speler
-      player3: "", //derde speler
-      player4: "", //vierde speler
-      is_playing: false, //als er een speler ant spelen is
-      is_waiting: false, //als er een speler ant wachten is op zijn beurt
       stripes:0, //het aantal strepen er mee gespeeld wordt
       score1:0,
       score2:0,
       score3:0,
       score4: 0,
+      player1: "Elke",
+      player2: "Jonas",
+      player3: "Angelique",
+      whoseTurn: 1,         // Whose turn it is
+      moves: 3,             // How many moves remain in this turn
+      gameOver: false,
       currentPlayer: 1,
       firstPlayerClicks:-1
      };
@@ -84,11 +86,10 @@ export default class PlayScreen extends React.Component {
     }
   
   }
-  pass = () =>{
+  pass(){
     //TODO: naar de volgende speler gaan en de kliks van de roll terug naar 0 zetten
     nextPlayer = this.state.currentPlayer + 1;
     this.setState({currentPlayer: nextPlayer});
-    console.log(nextPlayer);
 
   }
 
@@ -106,11 +107,16 @@ export default class PlayScreen extends React.Component {
     ];
     return (
       <View>
+         <Text>Players whoseTurn</Text>
+         <Text>{this.state.whoseTurn}</Text>
         <Button title="ROl" onPress={this._rollDice} />
         <Button title="PAS" onPress={this._pass} />
         <DiceOne />
         <DiceTwo />
         <DiceTree />
+        <Text>{this.state.player1}</Text>
+        <Text>{this.state.player2}</Text>
+        <Text>{this.state.player3}</Text>
         <Button
           title="Startscherm"
           onPress={() => this.props.navigation.navigate("PlayersScreen")}
@@ -123,8 +129,6 @@ export default class PlayScreen extends React.Component {
     );
   }
 }
-
-
 /* Optellen van de punten en in een array steken */
 function points(sideuno, sidedos, sidetres) {
   let point1 = setScore(sideuno + 1);
