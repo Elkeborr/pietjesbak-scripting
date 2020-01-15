@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { Button, View, StyleSheet, Text } from "react-native";
-import { Container, TouchContainer } from "./styles";
+//http://codesandbox.io/s/dice-game-3q87u?from-embed
+
+import React, { Component } from 'react';
+import { Button, View, StyleSheet, Text } from 'react-native';
 
 import {
   SideThree,
@@ -8,8 +9,8 @@ import {
   SideTwo,
   SideFour,
   SideFive,
-  SideSix
-} from "./components/dice/side";
+  SideSix,
+} from './components/dice/side';
 
 /* sides en clicks initialiseren */
 let sideuno;
@@ -19,46 +20,45 @@ let countClickPlus;
 
 let nextPlayer;
 
-
-
 export default class PlayScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       sideOne: 0, //eerste dobbelsteen
       sideTwo: 0, //tweede dobbelsteen
       sideTree: 0, //derde dobbelsteen
       countClick: 0, //tellen van de clicks
-      stripes:0, //het aantal strepen er mee gespeeld wordt
-      score1:0,
-      score2:0,
-      score3:0,
-      score4: 0,
-      player1: "Elke",
-      player2: "Jonas",
-      player3: "Angelique",
-      whoseTurn: 1,         // Whose turn it is
-      moves: 3,             // How many moves remain in this turn
+      stripes: 0, //het aantal strepen er mee gespeeld wordt
+      score1: [],
+      score2: [],
+      score3: [],
+      score4: [],
+      player1: 'Elke',
+      player2: 'Jonas',
+      player3: 'Angelique',
+      player4: '',
+      amountPlayers: 3,
+      whoseTurn: 1, // Whose turn it is
+      moves: 3, // How many moves remain in this turn
       gameOver: false,
-      currentPlayer: 1,
-      firstPlayerClicks:-1
-     };
-    this._rollDice = this._rollDice.bind(this);  
+      winner:0
+    };
+    this._rollDice = this._rollDice.bind(this);
+    this._pass = this._pass.bind(this);
   }
-  players = () =>{
+  players = () => {
     //Spelers uit vorige scherm halen
-    let players = ['Elke','Jonas','Angelique'];
+    let players = ['Elke', 'Jonas', 'Angelique'];
     //Random speler aanduiden
     let randomNumber = Math.floor(Math.random() * players.length);
     //Namen setten
     this.setState({
-      player1: "Elke",
-      player2: "Jonas",
-      player3: "Angelique",
-      currentPlayer: randomNumber
-    })
-
-  }
+      player1: 'Elke',
+      player2: 'Jonas',
+      player3: 'Angelique',
+      currentPlayer: randomNumber,
+    });
+  };
   _rollDice() {
     // De kant van de dobbelsteen bepalen
     sideuno = Math.floor(Math.random() * 6);
@@ -67,32 +67,50 @@ export default class PlayScreen extends React.Component {
     // Aantal keer je klikt optellen
     countClickPlus = this.state.countClick + 1;
     // Functie aanroepen waarmee je gaat zien hoeveel u totaal is
-    points(sideuno, sidedos, sidetres);
-    // De state (status) veranderen van de stenen en de kliks
+    let point1 = setScore(sideuno + 1);
+    let point2 = setScore(sidedos + 1);
+    let point3 = setScore(sidetres + 1);
+    let points = point1 + point2 + point3;
+    if (
+      point1 == point2 &&
+      point2 == point3 &&
+      point1 == point3 &&
+      points != 300
+    ) {
+      /*waarom punten in -: bij een zand moet je 1 punt onthouden, voor te zien wie
+      het hoogste heeft, ik zet da int min zoda die da ni meerekent als punt (herkenningsteken)*/
+      points = -point1;
+    }
+    let amountMoves = this.state.moves - countClickPlus;
+    if (this.state.whoseTurn === 2) {
+      this.state.score2.push(points);
+    } else if (this.state.whoseTurn === 3) {
+      this.state.score3.push(points);
+    } else if (this.state.whoseTurn === 4) {
+      this.state.score4.push(points);
+    } else if (this.state.whoseTurn === 1) {
+      this.state.score1.push(points);
+      this.setState({moves: amountMoves});
+    } 
+ // De state (status) veranderen van de stenen
     this.setState({
       sideOne: sideuno,
       sideTwo: sidedos,
       sideTree: sidetres,
-      countClick:countClickPlus
     });
-    if(countClickPlus == 3 || countClickPlus == this.state.firstPlayerClicks){
+    console.log(countClickPlus);
+    if (countClickPlus === 3 || countClickPlus === this.state.moves) {
+     //this.setState({ firstPlayerClicks: countClickPlus });
       //veranderen van speler
       countClickPlus = 0;
-      nextPlayer = this.state.currentPlayer + 1;
-      this.setState({currentPlayer: nextPlayer,
-        countClick:countClickPlus
-      });
-      //console.log(nextPlayer);
+      nextPlayer = this.state.whoseTurn + 1;
+      this.setState({ whoseTurn: nextPlayer, countClick: countClickPlus });
     }
-  
   }
-  pass(){
-    //TODO: naar de volgende speler gaan en de kliks van de roll terug naar 0 zetten
-    nextPlayer = this.state.currentPlayer + 1;
-    this.setState({currentPlayer: nextPlayer});
-
+  _pass() {
+    nextPlayer = this.state.whoseTurn + 1;
+    this.setState({ whoseTurn: nextPlayer });
   }
-
   render() {
     const DiceOne = [SideOne, SideTwo, SideThree, SideFour, SideFive, SideSix][
       this.state.sideOne
@@ -107,46 +125,45 @@ export default class PlayScreen extends React.Component {
     ];
     return (
       <View>
-         <Text>Players whoseTurn</Text>
-         <Text>{this.state.whoseTurn}</Text>
+        <Text>WhoseTurn</Text>
+        <Text>{this.state.whoseTurn}</Text>
+        <Text>firstPlayerClicks</Text>
+        <Text>{this.state.moves}</Text>
+        <Text>score1</Text>
+        <Text>
+          {this.state.score1.map(listitem => (
+            <li className="list-group-item list-group-item-primary">
+              {listitem}
+            </li>
+          ))}
+        </Text>
+        <Text>score2</Text>
+        <Text>
+          {this.state.score2.map(listitem => (
+            <li className="list-group-item list-group-item-primary">
+              {listitem}
+            </li>
+          ))}
+        </Text>
+
         <Button title="ROl" onPress={this._rollDice} />
         <Button title="PAS" onPress={this._pass} />
         <DiceOne />
         <DiceTwo />
         <DiceTree />
-        <Text>{this.state.player1}</Text>
-        <Text>{this.state.player2}</Text>
-        <Text>{this.state.player3}</Text>
         <Button
           title="Startscherm"
-          onPress={() => this.props.navigation.navigate("PlayersScreen")}
+          onPress={() => this.props.navigation.navigate('PlayersScreen')}
         />
         <Button
           title="Einde"
-          onPress={() => this.props.navigation.navigate("EndScreen")}
+          onPress={() => this.props.navigation.navigate('EndScreen')}
         />
       </View>
     );
   }
 }
-/* Optellen van de punten en in een array steken */
-function points(sideuno, sidedos, sidetres) {
-  let point1 = setScore(sideuno + 1);
-  let point2 = setScore(sidedos + 1);
-  let point3 = setScore(sidetres + 1);
-  let points = point1 + point2 + point3;
-  if (
-    point1 == point2 &&
-    point2 == point3 &&
-    point1 == point3 &&
-    points != 300
-  ) {
-    points = -1;
-  }
- // console.log(points);
-  return points;
-  //TODO: deze punten moetn in een array van de speler gestoken worden en bijgehouden
-}
+
 
 /* Wat zijn u stenen waard, 1=100, 6==60, de rest is het zelfde */
 function setScore(score) {
