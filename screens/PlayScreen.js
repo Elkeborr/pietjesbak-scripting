@@ -41,7 +41,7 @@ export default class PlayScreen extends React.Component {
       whoseTurn: 1, // Whose turn it is
       moves: 3, // How many moves remain in this turn
       gameOver: false,
-      winner:0
+      winner: 0,
     };
     this._rollDice = this._rollDice.bind(this);
     this._pass = this._pass.bind(this);
@@ -65,7 +65,7 @@ export default class PlayScreen extends React.Component {
     sidedos = Math.floor(Math.random() * 6);
     sidetres = Math.floor(Math.random() * 6);
     // Aantal keer je klikt optellen
-    countClickPlus = this.state.countClick + 1;
+    countClickPlus = this.state.countClick +1;
     // Functie aanroepen waarmee je gaat zien hoeveel u totaal is
     let point1 = setScore(sideuno + 1);
     let point2 = setScore(sidedos + 1);
@@ -90,17 +90,16 @@ export default class PlayScreen extends React.Component {
       this.state.score4.push(points);
     } else if (this.state.whoseTurn === 1) {
       this.state.score1.push(points);
-      this.setState({moves: amountMoves});
-    } 
- // De state (status) veranderen van de stenen
+      this.setState({ moves: amountMoves });
+    }
+    // De state (status) veranderen van de stenen
     this.setState({
       sideOne: sideuno,
       sideTwo: sidedos,
       sideTree: sidetres,
     });
     console.log(countClickPlus);
-    if (countClickPlus === 3 || countClickPlus === this.state.moves) {
-     //this.setState({ firstPlayerClicks: countClickPlus });
+    if (countClickPlus === 3 || countClickPlus === (3-this.state.moves)) {
       //veranderen van speler
       countClickPlus = 0;
       nextPlayer = this.state.whoseTurn + 1;
@@ -163,7 +162,6 @@ export default class PlayScreen extends React.Component {
     );
   }
 }
-
 
 /* Wat zijn u stenen waard, 1=100, 6==60, de rest is het zelfde */
 function setScore(score) {
