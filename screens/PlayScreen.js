@@ -16,7 +16,7 @@ import {
 let sideuno;
 let sidedos;
 let sidetres;
-let countClickPlus;
+let countClicks = 0;
 
 let nextPlayer;
 
@@ -27,7 +27,6 @@ export default class PlayScreen extends React.Component {
       sideOne: 0, //eerste dobbelsteen
       sideTwo: 0, //tweede dobbelsteen
       sideTree: 0, //derde dobbelsteen
-      countClick: 0, //tellen van de clicks
       stripes: 0, //het aantal strepen er mee gespeeld wordt
       score1: [],
       score2: [],
@@ -39,7 +38,7 @@ export default class PlayScreen extends React.Component {
       player4: '',
       amountPlayers: 3,
       whoseTurn: 1, // Whose turn it is
-      moves: 3, // How many moves remain in this turn
+      moves: 0, // How many moves remain in this turn
       gameOver: false,
       winner: 0,
     };
@@ -63,9 +62,7 @@ export default class PlayScreen extends React.Component {
     // De kant van de dobbelsteen bepalen
     sideuno = Math.floor(Math.random() * 6);
     sidedos = Math.floor(Math.random() * 6);
-    sidetres = Math.floor(Math.random() * 6);
-    // Aantal keer je klikt optellen
-    countClickPlus = this.state.countClick +1;
+    sidetres = Math.floor(Math.random()* 6);
     // Functie aanroepen waarmee je gaat zien hoeveel u totaal is
     let point1 = setScore(sideuno + 1);
     let point2 = setScore(sidedos + 1);
@@ -81,7 +78,11 @@ export default class PlayScreen extends React.Component {
       het hoogste heeft, ik zet da int min zoda die da ni meerekent als punt (herkenningsteken)*/
       points = -point1;
     }
-    let amountMoves = this.state.moves - countClickPlus;
+
+    // Aantal keer je klikt optellen
+    countClicks = countClicks + 1;
+
+    let amountMoves = this.state.moves + 1;
     if (this.state.whoseTurn === 2) {
       this.state.score2.push(points);
     } else if (this.state.whoseTurn === 3) {
@@ -98,15 +99,15 @@ export default class PlayScreen extends React.Component {
       sideTwo: sidedos,
       sideTree: sidetres,
     });
-    console.log(countClickPlus);
-    if (countClickPlus === 3 || countClickPlus === (3-this.state.moves)) {
+    if ( countClicks === 3 || countClicks === this.state.moves && this.state.moves !== 0 ) {
       //veranderen van speler
-      countClickPlus = 0;
+      countClicks = 0;
       nextPlayer = this.state.whoseTurn + 1;
-      this.setState({ whoseTurn: nextPlayer, countClick: countClickPlus });
+      this.setState({ whoseTurn: nextPlayer });
     }
   }
   _pass() {
+    countClicks = 0;
     nextPlayer = this.state.whoseTurn + 1;
     this.setState({ whoseTurn: nextPlayer });
   }
@@ -126,7 +127,7 @@ export default class PlayScreen extends React.Component {
       <View>
         <Text>WhoseTurn</Text>
         <Text>{this.state.whoseTurn}</Text>
-        <Text>firstPlayerClicks</Text>
+        <Text>Total moves allowed</Text>
         <Text>{this.state.moves}</Text>
         <Text>score1</Text>
         <Text>
