@@ -35,12 +35,15 @@ Dueleren met 1 dobbelsteen. (Bij duel mogen ze ook 2 strepen verwijderen)
 Geen van de bovenste dan wint de hoogste score  
 1 = 100  
 6 = 60  
-### Een 7️⃣
-Bij een zeven komt er bij elke speler een streep bij  
+
 ### Belangrijk 🥔
 Zand van 1 bestaat niet!  
 De persoon die wint mag starten  
 Een speler mag max 3 keer rollen of het aantal rols van de eerste speler  
 Fake buttons zijn belangrijk voor het testen  
-De speler mag passen maar niet als die nog niet gegooid heegt  
+De speler mag passen maar niet als die nog niet gegooid heeft  
+Aantal strepen (normaal gezien) 9
 
+## Linken
+
+https://pusher.com/tutorials/realtime-game-react-native
