@@ -516,11 +516,272 @@ export default class PlayScreen extends React.Component {
       }
     }
   }
-  /* passen */
+  //passen
   _pass() {
-    countClicks = 0;
-    nextPlayer = this.state.whoseTurn + 1;
-    this.setState({ whoseTurn: nextPlayer });
+    console.log(this.state.moves)
+   if (this.state.whoseTurn < this.state.amountPlayers) {
+      console.log('ola')
+        // Volgende speler
+        nextPlayer = this.state.whoseTurn + 1;
+        this.setState({ whoseTurn: nextPlayer });
+         countClicks = 0;
+      } else {
+        console.log("helle")
+        // Ronde is gedaan; terug naar eerste speler & scores worden berekend
+          nextPlayer = 1;
+        this.setState({ whoseTurn: nextPlayer });
+
+        //strepen van alle spelers
+        let stripes = [
+          this.state.player_1[2],
+          this.state.player_2[2],
+          this.state.player_3[2],
+          this.state.player_4[2],
+        ];
+        // de uiteindelijke score
+        let finalScores = calculateScores(
+          this.state.score1,
+          this.state.score2,
+          this.state.score3,
+          this.state.score4
+        );
+        // gaan we dueleren of niet?
+  
+   if (this.state.amountPlayers === 2) {
+          if (finalScores[0] === finalScores[1]) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_1[1]],
+              dualPlayer2: [2, this.state.player_2[1]],
+              dualTime: true,
+              dualPlayers: 2,
+            });
+          
+          } else {
+            let roundResults = roundWinner(finalScores, stripes);
+        let updatedStripes = roundResults[0];
+        let winnerRound = roundResults[1];
+        this.setState({ stripes1: updatedStripes[0].stripes1 });
+        this.setState({ stripes2: updatedStripes[1].stripes2 });
+        this.setState({ stripes3: updatedStripes[2].stripes3 });
+        this.setState({ stripes4: updatedStripes[3].stripes4 });
+        updatedStripes1 = updatedStripes[0].stripes1;
+        updatedStripes2 = updatedStripes[1].stripes2;
+        updatedStripes3 = updatedStripes[2].stripes3;
+        updatedStripes4 = updatedStripes[3].stripes4;
+          }
+        } else if (this.state.amountPlayers === 3) {
+          if (
+            finalScores[0] === finalScores[1] &&
+            finalScores[1] === finalScores[2]
+          ) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_1[1]],
+              dualPlayer2: [2, this.state.player_2[1]],
+              dualPlayer3: [3, this.state.player_3[1]],
+              dualTime: true,
+              dualPlayers: 3,
+            });
+          } else if (finalScores[0] === finalScores[1]) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_1[1]],
+              dualPlayer2: [2, this.state.player_2[1]],
+              dualTime: true,
+              dualPlayers: 2,
+            });
+          } else if (finalScores[0] === finalScores[2]) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_1[1]],
+              dualPlayer2: [2, this.state.player_3[1]],
+              dualTime: true,
+              dualPlayers: 2,
+            });
+          } else if (finalScores[1] === finalScores[2]) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_2[1]],
+              dualPlayer2: [2, this.state.player_3[1]],
+              dualTime: true,
+              dualPlayers: 2,
+            });
+          }
+        } else if (this.state.amountPlayers === 4) {
+          if (
+            finalScores[0] === finalScores[1] &&
+            finalScores[1] === finalScores[3] &&
+            finalScores[1] === finalScores[2]
+          ) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_1[1]],
+              dualPlayer2: [2, this.state.player_2[1]],
+              dualPlayer3: [3, this.state.player_3[1]],
+              dualPlayer4: [4, this.state.player_4[1]],
+              dualTime: true,
+              dualPlayers: 4,
+            });
+          } else if (
+            finalScores[0] === finalScores[1] &&
+            finalScores[1] === finalScores[2]
+          ) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_1[1]],
+              dualPlayer2: [2, this.state.player_2[1]],
+              dualPlayer3: [3, this.state.player_3[1]],
+              dualTime: true,
+              dualPlayers: 3,
+            });
+          } else if (
+            finalScores[2] === finalScores[3] &&
+            finalScores[3] === finalScores[0]
+          ) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_1[1]],
+              dualPlayer2: [2, this.state.player_3[1]],
+              dualPlayer3: [3, this.state.player_4[1]],
+              dualTime: true,
+              dualPlayers: 3,
+            });
+          } else if (
+            finalScores[0] === finalScores[1] &&
+            finalScores[1] === finalScores[3]
+          ) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_1[1]],
+              dualPlayer2: [2, this.state.player_2[1]],
+              dualPlayer3: [3, this.state.player_4[1]],
+              dualTime: true,
+              dualPlayers: 3,
+            });
+          } else if (finalScores[0] === finalScores[3]) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_1[1]],
+              dualPlayer2: [2, this.state.player_4[1]],
+              dualTime: true,
+              dualPlayers: 2,
+            });
+          } else if (finalScores[0] === finalScores[1]) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_1[1]],
+              dualPlayer2: [2, this.state.player_2[1]],
+              dualTime: true,
+              dualPlayers: 2,
+            });
+          } else if (finalScores[0] === finalScores[2]) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_1[1]],
+              dualPlayer2: [2, this.state.player_3[1]],
+              dualTime: true,
+              dualPlayers: 2,
+            });
+          } else if (finalScores[1] === finalScores[2]) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_2[1]],
+              dualPlayer2: [2, this.state.player_3[1]],
+              dualTime: true,
+              dualPlayers: 2,
+            });
+          } else if (finalScores[2] === finalScores[3]) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_3[1]],
+              dualPlayer2: [2, this.state.player_4[1]],
+              dualTime: true,
+              dualPlayers: 2,
+            });
+          } else if (finalScores[1] === finalScores[3]) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_2[1]],
+              dualPlayer2: [2, this.state.player_4[1]],
+              dualTime: true,
+              dualPlayers: 2,
+            });
+          } else if ((finalScores[1] === finalScores[3]) === finalScores[2]) {
+            this.setState({
+              dualPlayer1: [1, this.state.player_2[1]],
+              dualPlayer2: [2, this.state.player_3[1]],
+              dualPlayer3: [3, this.state.player_4[1]],
+              dualTime: true,
+              dualPlayers: 3,
+            });
+          }
+        }
+
+     
+        // Volgorde veranderen op basis van ronde winnnaar
+
+        if (this.state.amountPlayers === 2) {
+          if (winnerRound === 1) {
+            this.setState({
+              player_1: [1, player1, updatedStripes1],
+              player_2: [2, player2, updatedStripes2],
+            });
+          } else if (winnerRound === 2) {
+            this.setState({
+              player_1: [1, player2, updatedStripes2],
+              player_2: [2, player1, updatedStripes1],
+            });
+          }
+        } else if (this.state.amountPlayers === 3) {
+          if (winnerRound === 1) {
+            this.setState({
+              player_1: [1, player1, updatedStripes1],
+              player_2: [2, player2, updatedStripes2],
+              player_3: [3, player3, updatedStripes3],
+            });
+          } else if (winnerRound === 2) {
+            this.setState({
+              player_1: [1, player2, updatedStripes2],
+              player_2: [2, player3, updatedStripes3],
+              player_3: [3, player1, updatedStripes1],
+            });
+          } else if (winnerRound === 3) {
+            this.setState({
+              player_1: [1, player3, updatedStripes3],
+              player_2: [2, player1, updatedStripes1],
+              player_3: [3, player2, updatedStripes2],
+            });
+          }
+        } else if (this.state.amountPlayers === 4) {
+          if (winnerRound === 1) {
+            this.setState({
+              player_1: [1, player1, updatedStripes1],
+              player_2: [2, player2, updatedStripes2],
+              player_3: [3, player3, updatedStripes3],
+              player_4: [4, player4, updatedStripes4],
+            });
+          } else if (winnerRound === 2) {
+            this.setState({
+              player_1: [1, player2, updatedStripes2],
+              player_2: [2, player3, updatedStripes3],
+              player_3: [3, player4, updatedStripes4],
+              player_4: [4, player1, updatedStripes1],
+            });
+          } else if (winnerRound === 3) {
+            this.setState({
+              player_1: [1, player3, updatedStripes3],
+              player_2: [2, player4, updatedStripes4],
+              player_3: [3, player1, updatedStripes1],
+              player_4: [4, player2, updatedStripes2],
+            });
+          } else if (winnerRound === 4) {
+            this.setState({
+              player_1: [1, player4, updatedStripes4],
+              player_2: [2, player1, updatedStripes1],
+              player_3: [3, player2, updatedStripes2],
+              player_4: [4, player3, updatedStripes3],
+            });
+          }
+        }
+         let round = this.state.rounds + 1;
+        this.setState({
+          score1: [],
+          score2: [],
+          score3: [],
+          score4: [],
+          countClicks: 0,
+          moves: 0,
+          rounds: round,
+        });
+        this.whoseTurn(this.state.rounds);
+      }
+    
   }
 
   //dueleren
