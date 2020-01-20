@@ -342,6 +342,11 @@ console.log(points)
           this.state.score3,
           this.state.score4
         );
+
+        let namePlayer1 = this.state.player_1[1];
+        let namePlayer2 = this.state.player_2[1];
+        let namePlayer3 = this.state.player_3[1];
+        let namePlayer4 = this.state.player_4[1];
         // gaan we dueleren of niet?
   
    if (this.state.amountPlayers === 2) {
@@ -532,63 +537,63 @@ console.log(points)
         if (this.state.amountPlayers === 2) {
           if (winnerRound === 1) {
             this.setState({
-              player_1: [1, player1, updatedStripes1],
-              player_2: [2, player2, updatedStripes2],
+              player_1: [1, namePlayer1, updatedStripes1],
+              player_2: [2, namePlayer2, updatedStripes2],
             });
           } else if (winnerRound === 2) {
             this.setState({
-              player_1: [1, player2, updatedStripes2],
-              player_2: [2, player1, updatedStripes1],
+              player_1: [1, namePlayer2, updatedStripes2],
+              player_2: [2, namePlayer1, updatedStripes1],
             });
           }
         } else if (this.state.amountPlayers === 3) {
           if (winnerRound === 1) {
             this.setState({
-              player_1: [1, player1, updatedStripes1],
-              player_2: [2, player2, updatedStripes2],
-              player_3: [3, player3, updatedStripes3],
+              player_1: [1, namePlayer1, updatedStripes1],
+              player_2: [2, namePlayer2, updatedStripes2],
+              player_3: [3, namePlayer3, updatedStripes3],
             });
           } else if (winnerRound === 2) {
             this.setState({
-              player_1: [1, player2, updatedStripes2],
-              player_2: [2, player3, updatedStripes3],
-              player_3: [3, player1, updatedStripes1],
+              player_1: [1, namePlayer2, updatedStripes2],
+              player_2: [2, namePlayer3, updatedStripes3],
+              player_3: [3, namePlayer1, updatedStripes1],
             });
           } else if (winnerRound === 3) {
             this.setState({
-              player_1: [1, player3, updatedStripes3],
-              player_2: [2, player1, updatedStripes1],
-              player_3: [3, player2, updatedStripes2],
+              player_1: [1, namePlayer3, updatedStripes3],
+              player_2: [2, namePlayer1, updatedStripes1],
+              player_3: [3, namePlayer2, updatedStripes2],
             });
           }
         } else if (this.state.amountPlayers === 4) {
           if (winnerRound === 1) {
             this.setState({
-              player_1: [1, player1, updatedStripes1],
-              player_2: [2, player2, updatedStripes2],
-              player_3: [3, player3, updatedStripes3],
-              player_4: [4, player4, updatedStripes4],
+              player_1: [1, namePlayer1, updatedStripes1],
+              player_2: [2, namePlayer2, updatedStripes2],
+              player_3: [3, namePlayer3, updatedStripes3],
+              player_4: [4, namePlayer4, updatedStripes4],
             });
           } else if (winnerRound === 2) {
             this.setState({
-              player_1: [1, player2, updatedStripes2],
-              player_2: [2, player3, updatedStripes3],
-              player_3: [3, player4, updatedStripes4],
-              player_4: [4, player1, updatedStripes1],
+              player_1: [1, namePlayer2, updatedStripes2],
+              player_2: [2, namePlayer3, updatedStripes3],
+              player_3: [3, namePlayer4, updatedStripes4],
+              player_4: [4, namePlayer1, updatedStripes1],
             });
           } else if (winnerRound === 3) {
             this.setState({
-              player_1: [1, player3, updatedStripes3],
-              player_2: [2, player4, updatedStripes4],
-              player_3: [3, player1, updatedStripes1],
-              player_4: [4, player2, updatedStripes2],
+              player_1: [1, namePlayer3, updatedStripes3],
+              player_2: [2, namePlayer4, updatedStripes4],
+              player_3: [3, namePlayer1, updatedStripes1],
+              player_4: [4, namePlayer2, updatedStripes2],
             });
           } else if (winnerRound === 4) {
             this.setState({
-              player_1: [1, player4, updatedStripes4],
-              player_2: [2, player1, updatedStripes1],
-              player_3: [3, player2, updatedStripes2],
-              player_4: [4, player3, updatedStripes3],
+              player_1: [1, namePlayer4, updatedStripes4],
+              player_2: [2, namePlayer1, updatedStripes1],
+              player_3: [3, namePlayer2, updatedStripes2],
+              player_4: [4, namePlayer3, updatedStripes3],
             });
           }
         }
@@ -799,63 +804,63 @@ console.log(points)
         if (this.state.amountPlayers === 2) {
           if (winnerRound === 1) {
             this.setState({
-              player_1: [1, player1, updatedStripes1],
-              player_2: [2, player2, updatedStripes2],
+              player_1: [1, namePlayer1, updatedStripes1],
+              player_2: [2, namePlayer2, updatedStripes2],
             });
           } else if (winnerRound === 2) {
             this.setState({
-              player_1: [1, player2, updatedStripes2],
-              player_2: [2, player1, updatedStripes1],
+              player_1: [1, namePlayer2, updatedStripes2],
+              player_2: [2, namePlayer1, updatedStripes1],
             });
           }
         } else if (this.state.amountPlayers === 3) {
           if (winnerRound === 1) {
             this.setState({
-              player_1: [1, player1, updatedStripes1],
-              player_2: [2, player2, updatedStripes2],
-              player_3: [3, player3, updatedStripes3],
+              player_1: [1, namePlayer1, updatedStripes1],
+              player_2: [2, namePlayer2, updatedStripes2],
+              player_3: [3, namePlayer3, updatedStripes3],
             });
           } else if (winnerRound === 2) {
             this.setState({
-              player_1: [1, player2, updatedStripes2],
-              player_2: [2, player3, updatedStripes3],
-              player_3: [3, player1, updatedStripes1],
+              player_1: [1, namePlayer2, updatedStripes2],
+              player_2: [2, namePlayer3, updatedStripes3],
+              player_3: [3, namePlayer1, updatedStripes1],
             });
           } else if (winnerRound === 3) {
             this.setState({
-              player_1: [1, player3, updatedStripes3],
-              player_2: [2, player1, updatedStripes1],
-              player_3: [3, player2, updatedStripes2],
+              player_1: [1, namePlayer3, updatedStripes3],
+              player_2: [2, namePlayer1, updatedStripes1],
+              player_3: [3, namePlayer2, updatedStripes2],
             });
           }
         } else if (this.state.amountPlayers === 4) {
           if (winnerRound === 1) {
             this.setState({
-              player_1: [1, player1, updatedStripes1],
-              player_2: [2, player2, updatedStripes2],
-              player_3: [3, player3, updatedStripes3],
-              player_4: [4, player4, updatedStripes4],
+              player_1: [1, namePlayer1, updatedStripes1],
+              player_2: [2, namePlayer2, updatedStripes2],
+              player_3: [3, namePlayer3, updatedStripes3],
+              player_4: [4, namePlayer4, updatedStripes4],
             });
           } else if (winnerRound === 2) {
             this.setState({
-              player_1: [1, player2, updatedStripes2],
-              player_2: [2, player3, updatedStripes3],
-              player_3: [3, player4, updatedStripes4],
-              player_4: [4, player1, updatedStripes1],
+              player_1: [1, namePlayer2, updatedStripes2],
+              player_2: [2, namePlayer3, updatedStripes3],
+              player_3: [3, namePlayer4, updatedStripes4],
+              player_4: [4, namePlayer1, updatedStripes1],
             });
           } else if (winnerRound === 3) {
             this.setState({
-              player_1: [1, player3, updatedStripes3],
-              player_2: [2, player4, updatedStripes4],
-              player_3: [3, player1, updatedStripes1],
-              player_4: [4, player2, updatedStripes2],
+              player_1: [1, namePlayer3, updatedStripes3],
+              player_2: [2, namePlayer4, updatedStripes4],
+              player_3: [3, namePlayer1, updatedStripes1],
+              player_4: [4, namePlayer2, updatedStripes2],
             });
           } else if (winnerRound === 4) {
             this.setState({
-              player_1: [1, player4, updatedStripes4],
-              player_2: [2, player1, updatedStripes1],
-              player_3: [3, player2, updatedStripes2],
-              player_4: [4, player3, updatedStripes3],
+              player_1: [1, namePlayer4, updatedStripes4],
+              player_2: [2, namePlayer1, updatedStripes1],
+              player_3: [3, namePlayer2, updatedStripes2],
+              player_4: [4, namePlayer3, updatedStripes3],
             });
           }
         }
@@ -944,63 +949,63 @@ console.log(points)
  if (this.state.amountPlayers === 2) {
           if (winnerRound === 1) {
             this.setState({
-              player_1: [1, player1, updatedStripes1],
-              player_2: [2, player2, updatedStripes2],
+              player_1: [1, namePlayer1, updatedStripes1],
+              player_2: [2, namePlayer2, updatedStripes2],
             });
           } else if (winnerRound === 2) {
             this.setState({
-              player_1: [1, player2, updatedStripes2],
-              player_2: [2, player1, updatedStripes1],
+              player_1: [1, namePlayer2, updatedStripes2],
+              player_2: [2, namePlayer1, updatedStripes1],
             });
           }
         } else if (this.state.amountPlayers === 3) {
           if (winnerRound === 1) {
             this.setState({
-              player_1: [1, player1, updatedStripes1],
-              player_2: [2, player2, updatedStripes2],
-              player_3: [3, player3, updatedStripes3],
+              player_1: [1, namePlayer1, updatedStripes1],
+              player_2: [2, namePlayer2, updatedStripes2],
+              player_3: [3, namePlayer3, updatedStripes3],
             });
           } else if (winnerRound === 2) {
             this.setState({
-              player_1: [1, player2, updatedStripes2],
-              player_2: [2, player3, updatedStripes3],
-              player_3: [3, player1, updatedStripes1],
+              player_1: [1, namePlayer2, updatedStripes2],
+              player_2: [2, namePlayer3, updatedStripes3],
+              player_3: [3, namePlayer1, updatedStripes1],
             });
           } else if (winnerRound === 3) {
             this.setState({
-              player_1: [1, player3, updatedStripes3],
-              player_2: [2, player1, updatedStripes1],
-              player_3: [3, player2, updatedStripes2],
+              player_1: [1, namePlayer3, updatedStripes3],
+              player_2: [2, namePlayer1, updatedStripes1],
+              player_3: [3, namePlayer2, updatedStripes2],
             });
           }
         } else if (this.state.amountPlayers === 4) {
           if (winnerRound === 1) {
             this.setState({
-              player_1: [1, player1, updatedStripes1],
-              player_2: [2, player2, updatedStripes2],
-              player_3: [3, player3, updatedStripes3],
-              player_4: [4, player4, updatedStripes4],
+              player_1: [1, namePlayer1, updatedStripes1],
+              player_2: [2, namePlayer2, updatedStripes2],
+              player_3: [3, namePlayer3, updatedStripes3],
+              player_4: [4, namePlayer4, updatedStripes4],
             });
           } else if (winnerRound === 2) {
             this.setState({
-              player_1: [1, player2, updatedStripes2],
-              player_2: [2, player3, updatedStripes3],
-              player_3: [3, player4, updatedStripes4],
-              player_4: [4, player1, updatedStripes1],
+              player_1: [1, namePlayer2, updatedStripes2],
+              player_2: [2, namePlayer3, updatedStripes3],
+              player_3: [3, namePlayer4, updatedStripes4],
+              player_4: [4, namePlayer1, updatedStripes1],
             });
           } else if (winnerRound === 3) {
             this.setState({
-              player_1: [1, player3, updatedStripes3],
-              player_2: [2, player4, updatedStripes4],
-              player_3: [3, player1, updatedStripes1],
-              player_4: [4, player2, updatedStripes2],
+              player_1: [1, namePlayer3, updatedStripes3],
+              player_2: [2, namePlayer4, updatedStripes4],
+              player_3: [3, namePlayer1, updatedStripes1],
+              player_4: [4, namePlayer2, updatedStripes2],
             });
           } else if (winnerRound === 4) {
             this.setState({
-              player_1: [1, player4, updatedStripes4],
-              player_2: [2, player1, updatedStripes1],
-              player_3: [3, player2, updatedStripes2],
-              player_4: [4, player3, updatedStripes3],
+              player_1: [1, namePlayer4, updatedStripes4],
+              player_2: [2, namePlayer1, updatedStripes1],
+              player_3: [3, namePlayer2, updatedStripes2],
+              player_4: [4, namePlayer3, updatedStripes3],
             });
           }
         }
