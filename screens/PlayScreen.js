@@ -51,8 +51,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   player:{
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    color:"#ffffff"
   }
 });
 
@@ -96,7 +95,6 @@ let updatedStripes2;
 let updatedStripes3;
 let updatedStripes4;
 
-//strepen van de spelers, hier kunnen we ook - me doen
 
 export default class PlayScreen extends React.Component {
   constructor(props) {
@@ -106,10 +104,6 @@ export default class PlayScreen extends React.Component {
       sideTwo: 0, //tweede dobbelsteen
       sideTree: 0, //derde dobbelsteen
       stripes: this.props.navigation.state.params.stripesTotal, //het aantal strepen er mee gespeeld wordt
-      stripes1: this.props.navigation.state.params.players.player_1.stripes,
-      stripes2: this.props.navigation.state.params.players.player_2.stripes,
-      stripes3: this.props.navigation.state.params.players.player_3.stripes,
-      stripes4: this.props.navigation.state.params.players.player_4.stripes,
       score1: [],
       score2: [],
       score3: [],
@@ -164,6 +158,7 @@ export default class PlayScreen extends React.Component {
     let point2 = setScore(sidedos + 1);
     let point3 = setScore(sidetres + 1);
     let points = point1 + point2 + point3;
+console.log(points)
     if (
       point1 == point2 &&
       point2 == point3 &&
@@ -179,28 +174,90 @@ export default class PlayScreen extends React.Component {
     if (points == 300) {
       console.log('Speler heeft DRIE APEN');
       if (this.state.whoseTurn == 1) {
-        if (this.state.player_1[2] == this.state.stripes) {
+        if (this.state.player_1[2]  >= this.state.stripes) {
           console.log('Speler 1 verliest, want heeft alle streepjes nog');
         } else {
           console.log('Speler 1 wint!!');
+        this.winner = this.props.navigation.state.params.players.player_1.name;
+        return this.props.navigation.navigate('EndScreen',{
+              winnerName: this.winner,
+              player_1_name: this.props.navigation.state.params.players.player_1.name,
+              stripes1: this.props.navigation.state.params.stripesTotal,
+              player_2_name: this.props.navigation.state.params.players.player_2.name,
+              stripes2: this.props.navigation.state.params.stripesTotal,
+              player_3_name: this.props.navigation.state.params.players.player_3.name,
+              stripes3: this.props.navigation.state.params.stripesTotal,
+              player_4_name: this.props.navigation.state.params.players.player_4.name,
+              stripes4: this.props.navigation.state.params.stripesTotal,
+              stripes: this.props.navigation.state.params.stripesTotal,
+              players: this.props.navigation.state.params.playersCount,
+      
+            });
+    }
         }
-      } else if (this.state.whoseTurn == 2) {
-        if (this.state.player_2[2] == this.state.stripes) {
+      
+       if (this.state.whoseTurn == 2) {
+        if (this.state.player_2[2]  >= this.state.stripes) {
           console.log('Speler 2 verliest, want heeft alle streepjes nog');
         } else {
           console.log('Speler 2 wint!!');
+           this.winner = this.props.navigation.state.params.players.player_2.name;
+        return this.props.navigation.navigate('EndScreen',{
+              winnerName: this.winner,
+              player_1_name: this.props.navigation.state.params.players.player_1.name,
+              stripes1: this.props.navigation.state.params.stripesTotal,
+              player_2_name: this.props.navigation.state.params.players.player_2.name,
+              stripes2: this.props.navigation.state.params.stripesTotal,
+              player_3_name: this.props.navigation.state.params.players.player_3.name,
+              stripes3: this.props.navigation.state.params.stripesTotal,
+              player_4_name: this.props.navigation.state.params.players.player_4.name,
+              stripes4: this.props.navigation.state.params.stripesTotal,
+              stripes: this.props.navigation.state.params.stripesTotal,
+              players: this.props.navigation.state.params.playersCount,
+      
+            });
         }
-      } else if (this.state.whoseTurn == 3) {
-        if (this.state.player_3[2] == this.state.stripes) {
+      } if (this.state.whoseTurn == 3) {
+        if (this.state.player_3[2] >= this.state.stripes) {
           console.log('Speler 3 verliest, want heeft alle streepjes nog');
         } else {
           console.log('Speler 3 wint!!');
+           this.winner = this.props.navigation.state.params.players.player_3.name;
+        return this.props.navigation.navigate('EndScreen',{
+              winnerName: this.winner,
+              player_1_name: this.props.navigation.state.params.players.player_1.name,
+              stripes1: this.props.navigation.state.params.stripesTotal,
+              player_2_name: this.props.navigation.state.params.players.player_2.name,
+              stripes2: this.props.navigation.state.params.stripesTotal,
+              player_3_name: this.props.navigation.state.params.players.player_3.name,
+              stripes3: this.props.navigation.state.params.stripesTotal,
+              player_4_name: this.props.navigation.state.params.players.player_4.name,
+              stripes4: this.props.navigation.state.params.stripesTotal,
+              stripes: this.props.navigation.state.params.stripesTotal,
+              players: this.props.navigation.state.params.playersCount,
+      
+            });
         }
-      } else if (this.state.whoseTurn == 4) {
-        if (this.state.player_4[2] == this.state.stripes) {
+      }  if (this.state.whoseTurn == 4) {
+        if (this.state.player_4[2] >= this.state.stripes) {
           console.log('Speler 4 verliest, want heeft alle streepjes nog');
         } else {
           console.log('Speler 4 wint!!');
+           this.winner = this.props.navigation.state.params.players.player_4.name;
+        return this.props.navigation.navigate('EndScreen',{
+              winnerName: this.winner,
+              player_1_name: this.props.navigation.state.params.players.player_1.name,
+              stripes1: this.props.navigation.state.params.stripesTotal,
+              player_2_name: this.props.navigation.state.params.players.player_2.name,
+              stripes2: this.props.navigation.state.params.stripesTotal,
+              player_3_name: this.props.navigation.state.params.players.player_3.name,
+              stripes3: this.props.navigation.state.params.stripesTotal,
+              player_4_name: this.props.navigation.state.params.players.player_4.name,
+              stripes4: this.props.navigation.state.params.stripesTotal,
+              stripes: this.props.navigation.state.params.stripesTotal,
+              players: this.props.navigation.state.params.playersCount,
+      
+            });
         }
       }
     }
@@ -277,8 +334,8 @@ export default class PlayScreen extends React.Component {
               dualPlayers: 2,
             });
           
-          } else {
-            let roundResults = roundWinner(finalScores, stripes);
+          }
+        let roundResults = roundWinner(finalScores, stripes);
         let updatedStripes = roundResults[0];
         let winnerRound = roundResults[1];
         this.setState({ stripes1: updatedStripes[0].stripes1 });
@@ -289,8 +346,10 @@ export default class PlayScreen extends React.Component {
         updatedStripes2 = updatedStripes[1].stripes2;
         updatedStripes3 = updatedStripes[2].stripes3;
         updatedStripes4 = updatedStripes[3].stripes4;
-          }
-        } else if (this.state.amountPlayers === 3) {
+          
+        } 
+        
+        if (this.state.amountPlayers === 3) {
           if (
             finalScores[0] === finalScores[1] &&
             finalScores[1] === finalScores[2]
@@ -324,7 +383,21 @@ export default class PlayScreen extends React.Component {
               dualPlayers: 2,
             });
           }
-        } else if (this.state.amountPlayers === 4) {
+           let roundResults = roundWinner(finalScores, stripes);
+        let updatedStripes = roundResults[0];
+        let winnerRound = roundResults[1];
+        this.setState({ stripes1: updatedStripes[0].stripes1 });
+        this.setState({ stripes2: updatedStripes[1].stripes2 });
+        this.setState({ stripes3: updatedStripes[2].stripes3 });
+        this.setState({ stripes4: updatedStripes[3].stripes4 });
+        updatedStripes1 = updatedStripes[0].stripes1;
+        updatedStripes2 = updatedStripes[1].stripes2;
+        updatedStripes3 = updatedStripes[2].stripes3;
+        updatedStripes4 = updatedStripes[3].stripes4;
+
+        } 
+        
+        if (this.state.amountPlayers === 4) {
           if (
             finalScores[0] === finalScores[1] &&
             finalScores[1] === finalScores[3] &&
@@ -422,10 +495,7 @@ export default class PlayScreen extends React.Component {
               dualPlayers: 3,
             });
           }
-        }
-
-
-       /* let roundResults = roundWinner(finalScores, stripes);
+           let roundResults = roundWinner(finalScores, stripes);
         let updatedStripes = roundResults[0];
         let winnerRound = roundResults[1];
         this.setState({ stripes1: updatedStripes[0].stripes1 });
@@ -435,8 +505,9 @@ export default class PlayScreen extends React.Component {
         updatedStripes1 = updatedStripes[0].stripes1;
         updatedStripes2 = updatedStripes[1].stripes2;
         updatedStripes3 = updatedStripes[2].stripes3;
-        updatedStripes4 = updatedStripes[3].stripes4;*/
-     
+        updatedStripes4 = updatedStripes[3].stripes4;
+        }
+
         // Volgorde veranderen op basis van ronde winnnaar
 
         if (this.state.amountPlayers === 2) {
@@ -516,7 +587,7 @@ export default class PlayScreen extends React.Component {
       }
     }
   }
-  //passen
+  // Passen
   _pass() {
     console.log(this.state.moves)
    if (this.state.whoseTurn < this.state.amountPlayers) {
@@ -931,7 +1002,6 @@ export default class PlayScreen extends React.Component {
 
     }
   }
-
   // naam opvragen van de speler die aan de beurt is
   whoseTurn() {
     let players = this.props.navigation.state.params.players;
@@ -961,7 +1031,81 @@ export default class PlayScreen extends React.Component {
     }
   }
 
-  render() {
+  render() { 
+      if(this.state.player_1[2] == 0 || this.state.player_2[2] == 0 ||
+      this.state.player_3[2] == 0 || this.state.player_4[2] == 0 ||
+      this.state.player_1[2] < 0 || this.state.player_2[2] < 0 ||
+      this.state.player_3[2] < 0 || this.state.player_4[2]< 0 ){
+        
+
+      if (this.state.player_1[2] == 0 || this.state.player_1[2] < 0){
+        this.winner = this.props.navigation.state.params.players.player_1.name;
+         console.log(this.winner);
+      }
+      else if (this.state.player_2[2] == 0 || this.state.player_2[2] < 0){
+        this.winner = this.props.navigation.state.params.players.player_2.name;
+     
+        console.log(this.winner);
+      }
+
+      else if (this.state.player_3[2] == 0 || this.state.player_3[2] < 0){
+        this.winner = this.props.navigation.state.params.players.player_3.name;
+       
+        console.log(this.winner);
+      }
+
+      else if (this.state.player_4[2] || this.state.player_4[2] < 0){
+        this.winner = this.props.navigation.state.params.players.player_4.name;
+       
+        console.log(this.winner);
+      }
+
+      this.setState({
+         score1: [],
+      score2: [],
+      score3: [],
+      score4: [],
+      player_1: [
+        1,
+        this.props.navigation.state.params.players.player_1.name,
+        this.props.navigation.state.params.players.player_1.stripes,
+      ], //id definieren
+      player_2: [
+        2,
+        this.props.navigation.state.params.players.player_2.name,
+        this.props.navigation.state.params.players.player_2.stripes,
+      ], //id definieren
+      player_3: [
+        3,
+        this.props.navigation.state.params.players.player_3.name,
+        this.props.navigation.state.params.players.player_3.stripes,
+      ], //id definieren
+      player_4: [
+        4,
+        this.props.navigation.state.params.players.player_4.name,
+        this.props.navigation.state.params.players.player_4.stripes,
+      ], //id definieren
+      amountPlayers: this.props.navigation.state.params.playersCount,
+      whoseTurn: 1, // Whose turn it is
+      moves: 0, // How many moves remain in this turn
+      })
+
+
+        return this.props.navigation.navigate('EndScreen',{
+              winnerName: this.winner,
+              player_1_name: this.props.navigation.state.params.players.player_1.name,
+              stripes1: this.props.navigation.state.params.stripesTotal,
+              player_2_name: this.props.navigation.state.params.players.player_2.name,
+              stripes2: this.props.navigation.state.params.stripesTotal,
+              player_3_name: this.props.navigation.state.params.players.player_3.name,
+              stripes3: this.props.navigation.state.params.stripesTotal,
+              player_4_name: this.props.navigation.state.params.players.player_4.name,
+              stripes4: this.props.navigation.state.params.stripesTotal,
+              stripes: this.props.navigation.state.params.stripesTotal,
+              players: this.props.navigation.state.params.playersCount,
+      
+            });
+    }
     let players = this.props.navigation.state.params.players;
     const { navigation } = this.props;
 
@@ -1017,10 +1161,19 @@ export default class PlayScreen extends React.Component {
         ) : null}
         </View>
         <View  style={styles.players}>
-            <Text>{this.state.player_1[1]} strepen: {this.state.player_1[2]}</Text>
-            <Text>{this.state.player_2[1]} strepen: {this.state.player_2[2]}</Text>
-            <Text>{this.state.player_3[1]} strepen: {this.state.player_3[2]}</Text>
-            <Text>{this.state.player_4[1]} strepen: {this.state.player_4[2]}</Text>
+        <Text>
+          {this.state.player_1[1]} stripes: {this.state.player_1[2]}
+        </Text>
+        <Text>
+          {this.state.player_2[1]} stripes: {this.state.player_2[2]}
+        </Text>
+        <Text>
+          {this.state.player_3[1]} stripes: {this.state.player_3[2]}
+        </Text>
+
+        <Text>
+          {this.state.player_4[1]} stripes: {this.state.player_4[2]}
+        </Text>
         </View>
       </View>
     );
