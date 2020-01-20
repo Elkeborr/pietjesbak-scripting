@@ -1,5 +1,7 @@
-import React from "react";
-import { Button, View, StyleSheet, Text } from "react-native";
+import React, { useContext } from 'react';
+import { Button, View, StyleSheet, Text, Dimensions } from 'react-native';
+
+import { Container, TouchContainer, colors } from './styles';
 const styles = StyleSheet.create({
   body: {
     backgroundColor: colors.bg,
@@ -18,8 +20,11 @@ const styles = StyleSheet.create({
 });
 
 export default class EndScreen extends React.Component {
-    render() {
 
+    render() {
+      const { navigation } = this.props;
+      const stripesTotal = this.props.navigation.state.params.stripes;
+      const playersCount = this.props.navigation.state.params.players;
           return (
             <View style={styles.body}>
               <Text style={styles.title}>Gefeliciteerd</Text>
