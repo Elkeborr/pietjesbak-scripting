@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     width: Dimensions.get('window').width,
-    top: 180,
+    top: 120,
     marginBottom: 15,
   },
   Btn: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   dice: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    top: -40,
+    top: -60,
   },
   backgroundImage: {
     position: 'absolute',
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   score: {
-    top: -200,
+    top: -180,
     textAlign: 'center',
     width: Dimensions.get('window').width,
     color: '#fff',
@@ -66,11 +66,16 @@ const styles = StyleSheet.create({
   },
   scoreList:{
     color: "#fff",
-    top: -60,
+    top: -80,
   },
   volgorde:{
-    top: -60,
+    top: -80,
     color: '#fff',
+  },
+  scoreType:{
+    color: '#fff',
+    top: -80,
+    fontWeight: '700',
   }
 });
 
@@ -127,6 +132,7 @@ export default class PlayScreen extends React.Component {
       score2: [],
       score3: [],
       score4: [],
+      scoreType: '',
       player_1: [
         1,
         this.props.navigation.state.params.players.player_1.name,
@@ -167,10 +173,12 @@ export default class PlayScreen extends React.Component {
 
   _rollDice() {
     let players = this.props.navigation.state.params.players;
+    this.setState({scoreType: ''});
     // De kant van de dobbelsteen bepalen
-    sideuno = Math.floor(Math.random() * 6);
-    sidedos = Math.floor(Math.random() * 6);
-    sidetres = Math.floor(Math.random() * 6);
+    
+      sideuno = Math.floor(Math.random() * 6);
+      sidedos = Math.floor(Math.random() * 6);
+      sidetres = Math.floor(Math.random() * 6);
 
     // Functie aanroepen waarmee je gaat zien hoeveel u totaal is
     let point1 = setScore(sideuno + 1);
@@ -189,12 +197,64 @@ console.log(points)
       points = -point1;
     }
 
+    if(points == 300){
+      this.setState({scoreType: ' DRIE APEN '});
+    } else if(points == 7){
+      this.setState({scoreType: ' ZEVEN '});
+    } else if(points == 69){
+      this.setState({scoreType: ' SOIXANTE NEUF '});
+    } else if(points < 0){
+      this.setState({scoreType: ' ZAND '});
+    } else {
+      this.setState({scoreType: ''});
+    }
+
+        let namePlayer1 = this.state.player_1[1];
+        let namePlayer2 = this.state.player_2[1];
+        let namePlayer3 = this.state.player_3[1];
+        let namePlayer4 = this.state.player_4[1];
+
     // DRIE APEN
     if (points == 300) {
       console.log('Speler heeft DRIE APEN');
       if (this.state.whoseTurn == 1) {
         if (this.state.player_1[2]  >= this.state.stripes) {
           console.log('Speler 1 verliest, want heeft alle streepjes nog');
+          if(this.state.amountPlayers > 2){
+            let newAmountPlayers = this.state.amountPlayers - 1;
+          
+            this.setState({amountPlayers: newAmountPlayers});
+            this.setState({
+              player_1: [1, namePlayer2, this.state.player_2[2]],
+              player_2: [2, namePlayer3, this.state.player_3[2]],
+              player_3: [3, namePlayer4, this.state.player_4[2]],
+              player_4: [4, '', 1000],
+            });
+            this.setState({countClicks: 0});
+            if(this.state.whoseTurn >= newAmountPlayers){
+              this.setState({whoseTurn: 1});
+            } else {
+              let newWhoseTurn = this.state.whoseTurn;
+              this.setState({whoseTurn: newWhoseTurn});
+            }
+          } else {
+            this.winner = this.state.player_2[1];
+            return this.props.navigation.navigate('EndScreen',{
+                  winnerName: this.winner,
+                  player_1_name: this.props.navigation.state.params.players.player_1.name,
+                  stripes1: this.props.navigation.state.params.stripesTotal,
+                  player_2_name: this.props.navigation.state.params.players.player_2.name,
+                  stripes2: this.props.navigation.state.params.stripesTotal,
+                  player_3_name: this.props.navigation.state.params.players.player_3.name,
+                  stripes3: this.props.navigation.state.params.stripesTotal,
+                  player_4_name: this.props.navigation.state.params.players.player_4.name,
+                  stripes4: this.props.navigation.state.params.stripesTotal,
+                  stripes: this.props.navigation.state.params.stripesTotal,
+                  players: this.props.navigation.state.params.playersCount,
+          
+                });
+          }
+          
         } else {
           console.log('Speler 1 wint!!');
         this.winner = this.props.navigation.state.params.players.player_1.name;
@@ -218,6 +278,39 @@ console.log(points)
        if (this.state.whoseTurn == 2) {
         if (this.state.player_2[2]  >= this.state.stripes) {
           console.log('Speler 2 verliest, want heeft alle streepjes nog');
+          if(this.state.amountPlayers > 2){
+          let newAmountPlayers = this.state.amountPlayers - 1;
+          this.setState({amountPlayers: newAmountPlayers});
+          this.setState({
+            player_1: [1, namePlayer1, this.state.player_1[2]],
+            player_2: [2, namePlayer3, this.state.player_3[2]],
+            player_3: [3, namePlayer4, this.state.player_4[2]],
+            player_4: [4, '', 1000],
+          });
+          
+          if(this.state.whoseTurn >= newAmountPlayers){
+            this.setState({whoseTurn: 1});
+          } else {
+            let newWhoseTurn = this.state.whoseTurn;
+            this.setState({whoseTurn: newWhoseTurn});
+          }
+        } else {
+          this.winner = this.state.player_1[1];
+          return this.props.navigation.navigate('EndScreen',{
+                winnerName: this.winner,
+                player_1_name: this.props.navigation.state.params.players.player_1.name,
+                stripes1: this.props.navigation.state.params.stripesTotal,
+                player_2_name: this.props.navigation.state.params.players.player_2.name,
+                stripes2: this.props.navigation.state.params.stripesTotal,
+                player_3_name: this.props.navigation.state.params.players.player_3.name,
+                stripes3: this.props.navigation.state.params.stripesTotal,
+                player_4_name: this.props.navigation.state.params.players.player_4.name,
+                stripes4: this.props.navigation.state.params.stripesTotal,
+                stripes: this.props.navigation.state.params.stripesTotal,
+                players: this.props.navigation.state.params.playersCount,
+        
+              });
+        }
         } else {
           console.log('Speler 2 wint!!');
            this.winner = this.props.navigation.state.params.players.player_2.name;
@@ -239,6 +332,22 @@ console.log(points)
       } if (this.state.whoseTurn == 3) {
         if (this.state.player_3[2] >= this.state.stripes) {
           console.log('Speler 3 verliest, want heeft alle streepjes nog');
+          let newAmountPlayers = this.state.amountPlayers - 1;
+          this.setState({amountPlayers: newAmountPlayers});
+          this.setState({
+            player_1: [1, namePlayer1, this.state.player_1[2]],
+            player_2: [2, namePlayer2, this.state.player_2[2]],
+            player_3: [3, namePlayer4, this.state.player_4[2]],
+            player_4: [4, '', 1000],
+          });
+          this.setState({countClicks: 0});
+          if(this.state.whoseTurn >= newAmountPlayers){
+            this.setState({whoseTurn: 1});
+          } else {
+            let newWhoseTurn = this.state.whoseTurn;
+            this.setState({whoseTurn: newWhoseTurn});
+          }
+        
         } else {
           console.log('Speler 3 wint!!');
            this.winner = this.props.navigation.state.params.players.player_3.name;
@@ -260,6 +369,22 @@ console.log(points)
       }  if (this.state.whoseTurn == 4) {
         if (this.state.player_4[2] >= this.state.stripes) {
           console.log('Speler 4 verliest, want heeft alle streepjes nog');
+          let newAmountPlayers = this.state.amountPlayers - 1;
+          
+          this.setState({amountPlayers: newAmountPlayers});
+          this.setState({
+            player_1: [1, namePlayer1, this.state.player_1[2]],
+            player_2: [2, namePlayer2, this.state.player_2[2]],
+            player_3: [3, namePlayer3, this.state.player_3[2]],
+            player_4: [4, '', 1000],
+          });
+          this.setState({countClicks: 0});
+          if(this.state.whoseTurn >= newAmountPlayers){
+            this.setState({whoseTurn: 1});
+          } else {
+            let newWhoseTurn = this.state.whoseTurn ;
+            this.setState({whoseTurn: newWhoseTurn});
+          }
         } else {
           console.log('Speler 4 wint!!');
            this.winner = this.props.navigation.state.params.players.player_4.name;
@@ -356,6 +481,7 @@ console.log(points)
               dualPlayer2: [2, this.state.player_2[1]],
               dualTime: true,
               dualPlayers: 2,
+              scoreType: ' DUEL ',
             });
           
           }
@@ -888,6 +1014,11 @@ console.log(points)
       sideTwo: sidedos,
     });
 
+    let namePlayer1 = this.state.player_1[1];
+        let namePlayer2 = this.state.player_2[1];
+        let namePlayer3 = this.state.player_3[1];
+        let namePlayer4 = this.state.player_4[1];
+
     //Punten voor niet meedoen spelers op 0 zette
     if (this.state.dualPlayers == 2) {
       this.state.dualPlayer3.push(0);
@@ -1191,6 +1322,7 @@ console.log(points)
           <Text style={[styles.thisPlayer]}>{this.whoseTurn()}</Text>
           <Text style={styles.max} title="Max aantal worpen:">Max aantal worpen: {this.state.moves}</Text>
         </View>
+        <View><Text style={styles.scoreType}>{this.state.scoreType}</Text></View>
        
         <View style={styles.dice}>
           <DiceOne/>
