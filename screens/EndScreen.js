@@ -12,11 +12,25 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
+    alignSelf: 'center',
   },
   button:{
-    marginTop:100,
-    
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    width: Dimensions.get('window').width,
+    top: 120,
+    marginBottom: 15,
   },
+  playButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    width: Dimensions.get('window').width,
+    top: 120,
+    marginBottom: 15,
+  },
+  content: {
+    marginTop: -220,
+  }
 });
 
 export default class EndScreen extends React.Component {
@@ -27,11 +41,13 @@ export default class EndScreen extends React.Component {
       const playersCount = this.props.navigation.state.params.players;
           return (
             <View style={styles.body}>
-              <Text style={styles.title}>Gefeliciteerd</Text>
-              <Text style={styles.title}> {JSON.stringify(navigation.getParam('winnerName', 'winnaar'))} heeft gewonnen</Text>
+              <View style={styles.content}>
+              <Text style={styles.title, {fontWeight: '700', color: '#FFF', fontSize: 28, width: Dimensions.get('window').width, alignSelf: 'center', textAlign: 'center'}}>Gefeliciteerd</Text>
+              <Text style={styles.title, {color: '#fff', textAlign: 'center', fontWeight: '700', fontSize: 20}}> {JSON.stringify(navigation.getParam('winnerName', 'winnaar'))} heeft gewonnen</Text>
               <View style={styles.button}>
                 <Button
                       title="Rematch"
+                      color={'#FF4141'}
                       onPress={() => {this.props.navigation.navigate('PlayScreen', {
                         players: {
                           player_1: {
@@ -66,8 +82,10 @@ export default class EndScreen extends React.Component {
               
           />
           <Button
-                      title="Home"
+                      title=" Home "
+                      color={'#00C3B4'}
                       onPress={() => {this.props.navigation.navigate('PlayersScreen')}} />
+           </View>
            </View>
           </View>
         );
