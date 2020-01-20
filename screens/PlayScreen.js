@@ -20,13 +20,17 @@ const styles = StyleSheet.create({
   playButtons: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+    width: Dimensions.get('window').width,
     top: 180,
     marginBottom: 15,
+  },
+  Btn: {
+    width: 180,
   },
   dice: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    top: 40,
+    top: -40,
   },
   backgroundImage: {
     position: 'absolute',
@@ -36,22 +40,37 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   score: {
-    top: -150,
+    top: -200,
     textAlign: 'center',
+    width: Dimensions.get('window').width,
     color: '#fff',
   },
 
-  times: {
+  title: {
     color: '#fff',
-    textAlign: 'center',
+    textAlign: 'left',
+    fontSize: 14,
+    marginLeft: 20,
   },
-  bold: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    marginBottom: 10,
+  thisPlayer: {
+    fontWeight: '700',
+    fontSize: 40,
+    marginLeft: 20,
+    marginBottom: 20,
+    color: '#fff',
+    textTransform: 'uppercase',
   },
-  player:{
-    color:"#ffffff"
+  max:{
+    alignSelf: 'center',
+    color: '#fff',
+  },
+  scoreList:{
+    color: "#fff",
+    top: -60,
+  },
+  volgorde:{
+    top: -60,
+    color: '#fff',
   }
 });
 
@@ -1031,6 +1050,38 @@ console.log(points)
     }
   }
 
+  renderNameInput() {
+    const inputs = [];
+    if(this.state.player_1[1] != ''){
+      inputs.push(
+      <Text style={styles.volgorde} key={(123)}>
+        {this.state.player_1[1]}: {this.state.player_1[2]}
+      </Text> 
+      )
+    }
+    if(this.state.player_2[1] != ''){
+      inputs.push(<Text style={styles.volgorde} key={(240)}>
+        {this.state.player_2[1]}: {this.state.player_2[2]}
+      </Text>
+      )
+    }
+    if(this.state.player_3[1] != ''){
+      inputs.push(
+<Text style={styles.volgorde} key={(389)}>
+        {this.state.player_3[1]}: {this.state.player_3[2]}
+      </Text>
+      )
+    }
+    if(this.state.player_4[1] != ''){
+      inputs.push(
+        <Text style={styles.volgorde} key={(573)}>
+        {this.state.player_4[1]}: {this.state.player_4[2]}
+      </Text>
+      )
+    }
+    return inputs;
+  }
+
   render() { 
       if(this.state.player_1[2] == 0 || this.state.player_2[2] == 0 ||
       this.state.player_3[2] == 0 || this.state.player_4[2] == 0 ||
@@ -1131,9 +1182,9 @@ console.log(points)
       <View style={styles.body}>
         <Image style={styles.backgroundImage} source={require('../assets/bak.png')}/>
         <View style={styles.score}>
-          <Text style={[styles.times, styles.bold]}title="De beurt is aan:">De beurt is aan:</Text>
-          <Text style={[styles.times, styles.bold]}>{this.whoseTurn()}</Text>
-          <Text style={styles.times} title="Max aantal worpen:">Max aantal worpen: {this.state.moves}</Text>
+          <Text style={[styles.title]}title="De beurt is aan:">De beurt is aan:</Text>
+          <Text style={[styles.thisPlayer]}>{this.whoseTurn()}</Text>
+          <Text style={styles.max} title="Max aantal worpen:">Max aantal worpen: {this.state.moves}</Text>
         </View>
        
         <View style={styles.dice}>
@@ -1145,36 +1196,23 @@ console.log(points)
 
         {this.state.dualTime ? (
          null
-        ) : <Button title="ROl" color={colors.blue} onPress={this._rollDice} />}
+        ) : <View style={styles.Btn}><Button title="ROl" color={colors.blue} onPress={this._rollDice} /></View>}
      {this.state.dualTime ? (
          null
-        ) : <Button
+        ) : <View style={styles.Btn}><Button
         title="PAS"
         color={colors.red}
         style={{ marginTop: 15 }}
         onPress={this._pass}
-      /> }
+      /></View> }
      
    
         {this.state.dualTime ? (
-          <Button title="DUEL" onPress={this._dual} />
+          <View style={styles.Btn}><Button title="DUEL" onPress={this._dual} /></View>
         ) : null}
         </View>
-        <View  style={styles.players}>
-        <Text>
-          {this.state.player_1[1]} stripes: {this.state.player_1[2]}
-        </Text>
-        <Text>
-          {this.state.player_2[1]} stripes: {this.state.player_2[2]}
-        </Text>
-        <Text>
-          {this.state.player_3[1]} stripes: {this.state.player_3[2]}
-        </Text>
-
-        <Text>
-          {this.state.player_4[1]} stripes: {this.state.player_4[2]}
-        </Text>
-        </View>
+        <View>{this.renderNameInput()}</View>
+        
       </View>
     );
   }

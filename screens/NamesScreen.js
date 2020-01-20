@@ -25,25 +25,27 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingLeft: 20,
     paddingRight: 20,
-    paddingTop: -100,
-    paddingBottom: 40,
+    top: -60,
+    width: Dimensions.get('window').width,
   },
 
   players: {
     color: '#fff',
     padding: 10,
+    top: -40,
     textAlign: 'center',
-    paddingBottom: 10,
   },
   playerName: {
     color: '#fff',
-    textAlign: 'center',
-    paddingBottom: 30,
-    paddingTop: 10,
+    backgroundColor: 'rgba(255,255,255,0.3)',
+    padding: 12,
+    width: 280,
+    top: 16,
+    marginBottom: 12,
   },
 
   grey: {
-    color: '#bbb',
+    color: '#fff',
   },
 });
 
@@ -76,15 +78,15 @@ export default class NamesScreen extends React.Component {
     for (let i = 1; i <= playersCount; i++) {
       // Try avoiding the use of index as a key, it has to be unique!
       inputs.push(
-        <View>
+        <View key={(i)}>
           <Text
-            style={{ fontWeight: 'bold', color: '#fff' }}
+            style={{ fontWeight: 'bold', color: '#fff', top: 12 }} key={(i*265)}
             title={'Speler_' + i}>
             {'Speler ' + i}
           </Text>
-          <TextInput
+          <TextInput key={i}
             style={[styles.playerName, styles.grey]}
-            placeholder={'Naam speler ' + i}
+            placeholder={'Voer naam speler ' + i + ' in.'} placeholderTextColor={'rgba(255,255,255,0.8)'}
             onChangeText={name => this.setState({ ['player_' + i]: { name } })}
           />
         </View>
@@ -102,7 +104,7 @@ export default class NamesScreen extends React.Component {
       <Text style={styles.title}>Wie doet er mee?</Text>
       <View style={styles.players}>
           {this.renderNameInput()}</View>
-          <Text style={{color:'#fff',marginBottom:10}}title="strepen">Aantal strepen : {stripesTotal}</Text>
+          <Text style={{color:'#fff',marginBottom:10}}title="strepen">Aantal strepen: {stripesTotal}</Text>
           <View style={{marginBottom:10}}>
           <Button
             title="Start spel"

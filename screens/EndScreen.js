@@ -65,6 +65,9 @@ export default class EndScreen extends React.Component {
                     }}
               
           />
+          <Button
+                      title="Home"
+                      onPress={() => {this.props.navigation.navigate('PlayersScreen')}} />
            </View>
           </View>
         );

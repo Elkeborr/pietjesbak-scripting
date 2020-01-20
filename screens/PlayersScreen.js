@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: 20,
     marginLeft: 5,
-    width: 120,
+    width: 400,
     fontSize: 30,
     tintColor:'#000000',
     marginRight: 5
@@ -33,7 +33,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
+    top: -80,
+    width: Dimensions.get('window').width,
   },
+  info: {
+    alignSelf: 'center',
+    color: '#ffffff',
+    bottom: 12,
+    top: 28,
+  }
 });
 
 export default class PlayersScreen extends React.Component {
@@ -53,20 +61,20 @@ export default class PlayersScreen extends React.Component {
           <Text style={styles.titles}>Hoeveel spelers?</Text>
 
           <View style={styles.Buttons}>
-            <Button
-              title="2"
+            <Button 
+              title="2 spelers"
               onPress={players =>
                 this.setState({ players: (this.setState.players = 2) })
               }
             />
             <Button
-              title="3"
+              title="3 spelers"
               onPress={players =>
                 this.setState({ players: (this.setState.players = 3) })
               }
             />
             <Button
-              title="4"
+              title="4 spelers"
               onPress={players =>
                 this.setState({ players: (this.setState.players = 4) })
               }
@@ -77,26 +85,26 @@ export default class PlayersScreen extends React.Component {
 
           <View style={styles.Buttons}>
             <Button
-              title="7"
+              title="7 streepjes"
               onPress={stripes =>
                 this.setState({ stripes: (this.setState.stripes = 7) })
               }
             />
             <Button
-              title="9"
+              title="9 streepjes"
               onPress={stripes =>
                 this.setState({ stripes: (this.setState.stripes = 9) })
               }
             />
             <Button
-              title="12"
+              title="12 streepjes"
               onPress={stripes =>
                 this.setState({ stripes: (this.setState.stripes = 12) })
               }
             />
           </View>
-          <Text style={{ color:'#ffffff'}}>{this.state.players} aantal spelers. {this.state.stripes} aantal streepjes.</Text>
-          <View style={{ width: 80, alignSelf: 'center' }}>
+          <Text style={styles.info}>{this.state.players} aantal spelers. {this.state.stripes} aantal streepjes.</Text>
+          <View style={{ width: 80, alignSelf: 'center', top: 60 }}>
             <Button
               title="Start"
               color={colors.blue}
